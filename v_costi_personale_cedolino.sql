@@ -1,4 +1,8 @@
-CREATE VIEW [dbo].[v_costi_personale_cedolino]
+drop view dbo.v_costi_personale_cedolino
+
+go
+
+create VIEW dbo.v_costi_personale_cedolino
 AS
 SELECT        dbo.PER_DTA_COS_STIP.AnnoRif, dbo.PER_DTA_COS_STIP.MeseRif, dbo.PER_DTA_COS_STIP.Matricola, dbo.PER_ANA_MAT.Cognome, dbo.PER_ANA_MAT.Nome, dbo.PER_DTA_COS_STIP.CodTipoCosto, 
                          dbo.PER_DTA_COS_STIP.CodContratto, dbo.PER_DTA_COS_STIP.CodVoceStip, dbo.PER_ANA_VOCI_STIP.DesVoceStip, dbo.PER_DTA_COS_STIP.Propro, dbo.PER_DTA_COS_STIP.Posfun, dbo.PER_DTA_COS_STIP.Posizione, 
@@ -23,8 +27,7 @@ FROM            dbo.COA_ANA_FP_FON_CAT LEFT OUTER JOIN
                          dbo.PER_ANA_MAT ON dbo.PER_DTA_COS_STIP.Matricola = dbo.PER_ANA_MAT.Matricola
 WHERE        (dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_DTA_COS_STIP.Matricola <> 194)
 OR
-(dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_DTA_COS_STIP.AnnoRif <> 2015);
-
+(dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_DTA_COS_STIP.AnnoRif <> 2015)
 
 /* REPLICO LA CONDIZIONE USATA SULLA VISTA COSTI_PERSONALE_X_ATTIVITA
 
