@@ -37,3 +37,11 @@ OR
 (dbo.PER_DTA_CST_MAT_PRO.Anno >= 2008) AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') 
 AND (dbo.PER_DTA_CST_MAT_PRO.Anno <> 2015)
 */
+
+/*test verifica congruita
+2075583,62  select sum(importopesato) from v_costi_personale_cedolino where annoliq = 2017 and meseliq = 9;
+
+verifico una modifica inserita a settembre retroattiva da febbraio, che nella mia tabella è già recepita
+select * from v_costi_personale_cedolino where annoliq = 2017 and matricola = 1099 and meseliq = 2;
+select * from per_dta_stip where annoliq = 2017 and matricola = 1099 and meseliq =2;
+*/
