@@ -19,15 +19,14 @@ FROM            dbo.COA_ANA_FP_FON_CAT LEFT OUTER JOIN
                          dbo.COA_DAT_FP ON dbo.PER_DTA_COS_STIP.AnnoRif = dbo.COA_DAT_FP.anno AND dbo.PER_DTA_COS_STIP.CodFp = dbo.COA_DAT_FP.Codice_FP INNER JOIN
                          dbo.COA_ANA_FP ON dbo.COA_DAT_FP.Codice_FP = dbo.COA_ANA_FP.CodFP INNER JOIN
                          dbo.COA_ANA_CONTI ON dbo.COA_DAT_FP.Conto = dbo.COA_ANA_CONTI.Cod_scon INNER JOIN
-                         dbo.MST_ANA_AGG_DEN ON dbo.PER_DTA_COS_STIP.CodCdC = dbo.MST_ANA_AGG_DEN.ID_0 INNER JOIN
                          dbo.PER_ANA_RUO ON dbo.PER_DTA_COS_STIP.IdRuolo = dbo.PER_ANA_RUO.IdRuolo INNER JOIN
                          dbo.V_PER_SITUAZIONE_AL_TOTALE ON dbo.PER_DTA_COS_STIP.AnnoRif = dbo.V_PER_SITUAZIONE_AL_TOTALE.Anno AND dbo.PER_DTA_COS_STIP.MeseRif = dbo.V_PER_SITUAZIONE_AL_TOTALE.Mese AND 
                          dbo.PER_DTA_COS_STIP.Matricola = dbo.V_PER_SITUAZIONE_AL_TOTALE.Matricola INNER JOIN
-                         dbo.COA_ANA_CDC ON dbo.PER_DTA_COS_STIP.CodCdC = dbo.COA_ANA_CDC.CodCdc ON dbo.COA_ANA_FP_FON.CodFondo = dbo.COA_ANA_FP.CodFondo LEFT OUTER JOIN
+                         dbo.COA_ANA_CDC ON dbo.PER_DTA_COS_STIP.CodCdC = dbo.COA_ANA_CDC.CodCdc INNER JOIN
+                         dbo.MST_ANA_AGG_DEN ON dbo.PER_DTA_COS_STIP.CodCdr = dbo.MST_ANA_AGG_DEN.ID_0 ON dbo.COA_ANA_FP_FON.CodFondo = dbo.COA_ANA_FP.CodFondo LEFT OUTER JOIN
                          dbo.PER_ANA_MAT ON dbo.PER_DTA_COS_STIP.Matricola = dbo.PER_ANA_MAT.Matricola
-WHERE        (dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_DTA_COS_STIP.Matricola <> 194)
-OR
-(dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_DTA_COS_STIP.AnnoRif <> 2015)
+WHERE        (dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_DTA_COS_STIP.Matricola <> 194) OR
+             (dbo.COA_ANA_FP.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_ANA_RUO.Gruppo3 <> N'NoCostoPers') AND (dbo.PER_DTA_COS_STIP.AnnoRif <> 2015)
 
 /* REPLICO LA CONDIZIONE USATA SULLA VISTA COSTI_PERSONALE_X_ATTIVITA
 
@@ -44,4 +43,7 @@ AND (dbo.PER_DTA_CST_MAT_PRO.Anno <> 2015)
 verifico una modifica inserita a settembre retroattiva da febbraio, che nella mia tabella è già recepita
 select * from v_costi_personale_cedolino where annoliq = 2017 and matricola = 1099 and meseliq = 2;
 select * from per_dta_stip where annoliq = 2017 and matricola = 1099 and meseliq =2;
+select * from costi_personale_x_attivita where matr = 1099 and anno = 2016 and mese = 12;
 */
+
+/*Faccio una modifica in modo che la struttura organizzativa sia legata al cento di attività e non al centro pagatore*/
